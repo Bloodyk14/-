@@ -1,39 +1,53 @@
-﻿/*int CalculateFormula(int a, int b, int c, int d)
+﻿int WorkWithUser(string message)
 {
-    int sum1 = a + b;
-    int sum2 = c + d;
-    int result = sum1 + sum2;
-    return result;
+    Console.Write(message);
+    int number = Convert.ToInt32(Console.ReadLine());
+    return number;
+}
+int[] GetNewArray(int len, int minValue, int maxValue)
+{
+    int[] newArray = new int[len];
+    Random rnd = new Random();
+    for (int i = 0; i < len; i++)
+    {
+        newArray[i] = rnd.Next(minValue, maxValue);
+    }
+    return newArray;
 }
 
-int answer = CalculateFormula(2, 4, 5, 7); 
-Console.WriteLine(answer); */
+void PrintArray(int[] arr)
+{
+    for (int i = 0; i < arr.Length; i++)
+    {
+        Console.Write($"{arr[i]} ");
+    }
+}
+int GetCountNormalNumber(int[] array)
+{
+    int counter = 0;
+    bool isPrime = false;
+    for (int i = 0; i < array.Length; i++)
+    {
+        isPrime = true;
+        for (int j = 2; j < array[i]; j++)
+        {
+            if (array[i] % j == 0)
+            {
+                isPrime = false;
+                break;
+            }
+        }
+        if (isPrime)
+        {
+            counter++;
+        }
+    }
+    return counter;
+}
 
-void SayHelloRu()
-{
-    Console.WriteLine("Привет");
-}
-void SayHelloEn()
-{
-    Console.WriteLine("Hello");
-}
-void SayHelloFr()
-{
-    Console.WriteLine("Salut");
-}
- 
- 
-string language = "fr";
- 
-switch (language)
-{
-    case "en": 
-        SayHelloEn();
-        break;
-    case "ru":
-        SayHelloRu();
-        break;
-    case "fr":
-        SayHelloFr();
-        break;
-}
+int size = WorkWithUser("Введите размер массива: ");
+int min = WorkWithUser("Введите минимальное значение диапазона: ");
+int max = WorkWithUser("Введите максимальное значение диапазона: ");
+int[] array2 = GetNewArray(size, min, max);
+
+System.Console.WriteLine(GetCountNormalNumber(array2));
